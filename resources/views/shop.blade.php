@@ -39,66 +39,13 @@
         <div>
             <h1 class="stylish-heading">Laptops</h1>
             <div class="products text-center">
+                @foreach($products as $product)
                 <div class="product">
                     <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
+                    <a href="#"><div class="product-name">{{ $product->name }}</div></a>
+                    <div class="product-price">{{ $product->presentPrice() }}</div>
                 </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
-                <div class="product">
-                    <a href="#"><img src="/img/macbook-pro.png" alt="product"></a>
-                    <a href="#"><div class="product-name">MacBook Pro</div></a>
-                    <div class="product-price">$2499.99</div>
-                </div>
+                @endforeach
             </div> <!-- end products -->
         </div>
     </div>

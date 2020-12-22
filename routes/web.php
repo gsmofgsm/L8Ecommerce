@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing-page');
-Route::view('/shop', '/shop');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::view('/product', '/product');
 Route::view('/cart', '/cart');
 Route::view('/checkout', '/checkout');
