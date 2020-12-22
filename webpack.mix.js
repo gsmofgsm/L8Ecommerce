@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+    .sass('resources/css/app.scss', 'public/css')
+    .sass('resources/css/responsive.scss', 'public/css')
+    .sourceMaps()
+    .browserSync('laravel-ecommerce-example.test');
