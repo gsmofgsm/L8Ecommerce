@@ -37,4 +37,5 @@ Route::get('empty', function () {
 });
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 Route::view('/thankyou', '/thankyou');

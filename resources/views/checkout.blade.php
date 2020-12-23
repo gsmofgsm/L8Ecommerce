@@ -3,7 +3,7 @@
 @section('title', 'Checkout')
 
 @section('extra-css')
-
+    <script src="https://js.stripe.com/v3/"></script>
 @endsection
 
 @section('content')
@@ -13,7 +13,8 @@
         <h1 class="checkout-heading stylish-heading">Checkout</h1>
         <div class="checkout-section">
             <div>
-                <form action="#">
+                <form action="{{ route('checkout.store') }}" method="POST" id="payment-form">
+                    @csrf
                     <h2>Billing Details</h2>
 
                     <div class="form-group">
@@ -59,30 +60,43 @@
                         <label for="name_on_card">Name on Card</label>
                         <input type="text" class="form-control" id="name_on_card" name="name_on_card" value="">
                     </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="">
-                    </div>
 
                     <div class="form-group">
-                        <label for="cc-number">Credit Card Number</label>
-                        <input type="text" class="form-control" id="cc-number" name="cc-number" value="">
-                    </div>
+                        <label for="card-element">
+                            Credit or debit card
+                        </label>
+                        <div id="card-element">
+                            <!-- a Stripe Element will be inserted here. -->
+                        </div>
 
-                    <div class="half-form">
-                        <div class="form-group">
-                            <label for="expiry">Expiry</label>
-                            <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/DD">
+                        <div id="card-errors" role="alert">
+                            <!-- Used to display form errors. -->
                         </div>
-                        <div class="form-group">
-                            <label for="cvc">CVC Code</label>
-                            <input type="text" class="form-control" id="cvc" name="cvc" value="">
-                        </div>
-                    </div> <!-- end half-form -->
+                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <label for="address">Address</label>--}}
+{{--                        <input type="text" class="form-control" id="address" name="address" value="">--}}
+{{--                    </div>--}}
+
+{{--                    <div class="form-group">--}}
+{{--                        <label for="cc-number">Credit Card Number</label>--}}
+{{--                        <input type="text" class="form-control" id="cc-number" name="cc-number" value="">--}}
+{{--                    </div>--}}
+
+{{--                    <div class="half-form">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="expiry">Expiry</label>--}}
+{{--                            <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/DD">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="cvc">CVC Code</label>--}}
+{{--                            <input type="text" class="form-control" id="cvc" name="cvc" value="">--}}
+{{--                        </div>--}}
+{{--                    </div> <!-- end half-form -->--}}
 
                     <div class="spacer"></div>
 
-                    <button type="submit" class="button-primary full-width">Complete Order</button>
+                    <button id="card-button" type="submit" class="button-primary full-width">Complete Order</button>
 
 
                 </form>
@@ -137,4 +151,20 @@
         </div> <!-- end checkout-section -->
     </div>
 
+@endsection
+
+@section('extra-js')
+    <script>
+        const stripe = Stripe('stripe-public-key');
+
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            hidePostalCode: true
+        });
+
+        cardElement.mount('#card-element');
+
+        // Handle form submission
+
+    </script>
 @endsection

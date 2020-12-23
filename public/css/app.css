@@ -822,6 +822,24 @@ h1.checkout-heading {
   line-height: 2.2;
 }
 
+.StripeElement {
+  background-color: white;
+  padding: 16px 16px;
+  border: 1px solid #ccc;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+#card-errors {
+  color: #fa755a;
+}
+
 .thank-you-section {
   display: flex;
   flex-direction: column;
