@@ -564,18 +564,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/gsmofgsm/LaravelShoppingcart.git",
-                "reference": "495d804d4838bd25c8548e201279ef6b883d63ef"
+                "reference": "3c6937acb5d39fa5e54e1018b15a8f1bb7a5320c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gsmofgsm/LaravelShoppingcart/zipball/495d804d4838bd25c8548e201279ef6b883d63ef",
-                "reference": "495d804d4838bd25c8548e201279ef6b883d63ef",
+                "url": "https://api.github.com/repos/gsmofgsm/LaravelShoppingcart/zipball/3c6937acb5d39fa5e54e1018b15a8f1bb7a5320c",
+                "reference": "3c6937acb5d39fa5e54e1018b15a8f1bb7a5320c",
                 "shasum": ""
             },
             "require": {
-                "illuminate/events": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || 5.8.*|| 6.0.*|| 7.0.*|| ^8.0",
-                "illuminate/session": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || 5.8.*|| 6.0.*|| 7.0.*|| ^8.0",
-                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || 5.8.*|| 6.0.*|| 7.0.*|| ^8.0"
+                "illuminate/events": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || ~8.0",
+                "illuminate/session": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || ~8.0",
+                "illuminate/support": "5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*|| 5.6.* || 5.7.* || ~8.0"
             },
             "require-dev": {
                 "mockery/mockery": "~0.9.0",
@@ -623,7 +623,7 @@
             "support": {
                 "source": "https://github.com/gsmofgsm/LaravelShoppingcart/tree/lc8"
             },
-            "time": "2020-12-23T00:08:46+00:00"
+            "time": "2020-12-23T13:10:40+00:00"
         },
         {
             "name": "graham-campbell/result-type",
