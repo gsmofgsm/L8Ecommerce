@@ -18,6 +18,12 @@
 
     <div class="cart-section container">
         <div>
+            @if (session()->has('success_message'))
+                <div class="alert alert-success">
+                    {{ session()->get('success_message') }}
+                </div>
+            @endif
+
             <h2>3 items in Shopping Cart</h2>
 
             <div class="cart-table">
