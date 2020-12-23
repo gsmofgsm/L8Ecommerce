@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ShopController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +22,11 @@ Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+
+Route::get('empty', function () {
+    Cart::destroy();
+    return 'Cart is now empty';
+});
+
 Route::view('/checkout', '/checkout');
 Route::view('/thankyou', '/thankyou');
