@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\ShopController;
@@ -35,5 +36,5 @@ Route::get('empty', function () {
     return 'Cart is now empty';
 });
 
-Route::view('/checkout', '/checkout');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::view('/thankyou', '/thankyou');
