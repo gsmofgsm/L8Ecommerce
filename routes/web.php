@@ -23,9 +23,11 @@ Route::get('/shop/{product}', [ShopController::class, 'show'])->name('shop.show'
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
+Route::post('/cart/later/{product}', [CartController::class, 'later'])->name('cart.later');
 
 Route::get('empty', function () {
     Cart::destroy();
+    Cart::instance('saveForLater')->destroy();
     return 'Cart is now empty';
 });
 

@@ -86,4 +86,29 @@ class CartController extends Controller
 
         return back()->with('success_message', 'Item has been removed!');
     }
+
+    /**
+     * switch To Save For Later.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function later($id)
+    {
+        $item = Cart::get($id);
+
+        Cart::remove($id);
+
+        $duplicates = Cart::instance('saveForLater')->search(function($cartItem, $rowId) use ($id) {
+            return $cartItem->id === $id;
+        });
+
+        if($duplicates->isNotEmpty()) {
+            return redirect()->route('cart.index')->with('success_message', 'Item is already Saved For Later!');
+        }
+
+        Cart::instance('saveForLater')->add($item->id, $item->name, 1, $item->price)
+            ->associate(Product::class);
+        return redirect()->route('cart.index')->with('success_message', 'Item has been saved for later!');
+    }
 }
