@@ -155,7 +155,7 @@
 
 @section('extra-js')
     <script>
-        const stripe = Stripe('stripe-public-key');
+        const stripe = Stripe('pk_test_51HxJRGJIK8V1V3nksnWNduAkGW9iy7A2fAprqCM9BpLIPIwM6dhPCNt8f94qPsBXq90VgMIiRWNVhHWmMx0vBx1Y00uO78JdIH');
 
         const elements = stripe.elements();
         const cardElement = elements.create('card', {
@@ -165,6 +165,41 @@
         cardElement.mount('#card-element');
 
         // Handle form submission
+        var form = document.getElementById('payment-form');
+        var cardHolderName = document.getElementById('name_on_card');
 
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const { paymentMethod, error } = await stripe.createPaymentMethod(
+                'card', cardElement, {
+                    billing_details: { name: cardHolderName.value }
+                }
+            );
+
+            if (error) {
+                // Inform the user if there was an error.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = error.message;
+            } else {
+                // Send the token to your server.
+                console.log(paymentMethod);
+                stripeTokenHandler(paymentMethod);
+            }
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(paymentMethod) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'paymentMethod');
+            hiddenInput.setAttribute('value', paymentMethod.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
     </script>
 @endsection
