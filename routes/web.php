@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\ShopController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,9 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}', [CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/later/{product}', [CartController::class, 'later'])->name('cart.later');
+
+Route::delete('/later/{product}', [SaveForLaterController::class, 'destroy'])->name('later.destroy');
+Route::post('/later/cart/{product}', [SaveForLaterController::class, 'cart'])->name('later.cart');
 
 Route::get('empty', function () {
     Cart::destroy();

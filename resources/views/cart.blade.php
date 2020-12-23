@@ -141,8 +141,17 @@
                     </div>
                     <div class="cart-table-row-right">
                         <div class="cart-table-actions">
-                            <a href="#">Remove</a> <br>
-                            <a href="#">Move to cart</a>
+{{--                            <a href="#">Remove</a> <br>--}}
+{{--                            <a href="#">Move to cart</a>--}}
+                            <form action="{{ route('later.destroy', $item->rowId) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="cart-options">Remove</button>
+                            </form>
+                            <form action="{{ route('later.cart', $item->rowId) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="cart-options">Move to cart</button>
+                            </form>
                         </div>
                         {{-- <div>
                             <select class="quantity">
