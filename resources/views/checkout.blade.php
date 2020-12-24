@@ -22,7 +22,7 @@
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
-                        <li>{!! $error !!}</li>
+                        <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -163,6 +163,15 @@
 
                     </div>
                 </div> <!-- end checkout-totals -->
+
+                <a href="#" class="have-code">Have a Code?</a>
+
+                <div class="have-code-container">
+                    <form action="#">
+                        <input type="text">
+                        <button type="submit" class="button button-plain">Apply</button>
+                    </form>
+                </div> <!-- end have-code-container -->
 
             </div>
 
