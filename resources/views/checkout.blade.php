@@ -189,6 +189,9 @@
         form.addEventListener('submit', async function (event) {
             event.preventDefault();
 
+            // Disable the submit button to prevent repeated clicks
+            document.getElementById('card-button').disabled = true;
+
             const { paymentMethod, error } = await stripe.createPaymentMethod(
                 'card', cardElement, {
                     billing_details: { name: cardHolderName.value }
@@ -199,6 +202,9 @@
                 // Inform the user if there was an error.
                 var errorElement = document.getElementById('card-errors');
                 errorElement.textContent = error.message;
+
+                // Enable the submit button
+                document.getElementById('card-button').disabled = false;
             } else {
                 // Send the token to your server.
                 console.log(paymentMethod);

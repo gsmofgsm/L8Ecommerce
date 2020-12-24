@@ -309,6 +309,11 @@ h2 {
   background: #35a48d;
 }
 
+.button-primary:disabled {
+  background: #63cdb7;
+  cursor: not-allowed;
+}
+
 .button-plain {
   border: 1px solid #212121 !important;
   background: transparent;
