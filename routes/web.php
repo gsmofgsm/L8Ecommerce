@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfirmationController;
+use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\ShopController;
@@ -37,6 +38,9 @@ Route::get('empty', function () {
     Cart::instance('saveForLater')->destroy();
     return 'Cart is now empty';
 });
+
+Route::post('/coupon', [CouponsController::class, 'store'])->name('coupon.store');
+Route::delete('/coupon', [CouponsController::class, 'destroy'])->name('coupon.destroy');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
