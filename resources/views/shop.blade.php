@@ -20,13 +20,9 @@
         <div class="sidebar">
             <h3>By Category</h3>
             <ul>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Desktops</a></li>
-                <li><a href="#">Mobile Phones</a></li>
-                <li><a href="#">Tablets</a></li>
-                <li><a href="#">TVs</a></li>
-                <li><a href="#">Digital Cameras</a></li>
-                <li><a href="#">Appliances</a></li>
+                @foreach($categories as $category)
+                <li><a href="{{ route('shop.index', ['category' => $category->slug]) }}">{{ $category->name }}</a></li>
+                @endforeach
             </ul>
 
             <h3>By Price</h3>
@@ -37,15 +33,17 @@
             </ul>
         </div> <!-- end sidebar -->
         <div>
-            <h1 class="stylish-heading">Laptops</h1>
+            <h1 class="stylish-heading">{{ $categoryName }}</h1>
             <div class="products text-center">
-                @foreach($products as $product)
-                <div class="product">
-                    <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
-                    <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
-                    <div class="product-price">{{ $product->presentPrice() }}</div>
-                </div>
-                @endforeach
+                @forelse($products as $product)
+                    <div class="product">
+                        <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ asset('img/products/' . $product->slug . '.jpg') }}" alt="product"></a>
+                        <a href="{{ route('shop.show', $product->slug) }}"><div class="product-name">{{ $product->name }}</div></a>
+                        <div class="product-price">{{ $product->presentPrice() }}</div>
+                    </div>
+                @empty
+                    <div style="text-align: left;">No items found</div>
+                @endforelse
             </div> <!-- end products -->
         </div>
     </div>
