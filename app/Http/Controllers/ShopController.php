@@ -22,17 +22,19 @@ class ShopController extends Controller
 //            })->get();
 //            $categoryName = $categories->where('slug', request()->category)->first()->name;
             $category = Category::where('slug', request()->category)->firstOrFail();
-            $products = $category->products()->get();
+            $products = $category->products();
             $categoryName = $category->name;
         } else {
-            $products = Product::inRandomOrder()->take(12)->get();
+            $products = Product::take(12);
             $categoryName = 'Featured';
         }
 
         if (request()->sort == 'low_high') {
-            $products = $products->sortBy('price');
+            $products = $products->orderBy('price')->simplePaginate(6);
         } elseif (request()->sort == 'high_low') {
-            $products = $products->sortByDesc('price');
+            $products = $products->orderBy('price', 'desc')->simplePaginate(6);
+        } else {
+            $products = $products->simplePaginate(6);
         }
 
         return view('shop')->with([

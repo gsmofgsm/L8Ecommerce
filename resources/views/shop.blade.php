@@ -52,6 +52,9 @@
                     <div style="text-align: left;">No items found</div>
                 @endforelse
             </div> <!-- end products -->
+
+            <div class="spacer"></div>
+            {{ $products->links() }}
         </div>
     </div>
 
