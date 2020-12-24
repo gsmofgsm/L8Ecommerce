@@ -27,7 +27,7 @@
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
-                        @foreach($erors->all() as $error)
+                        @foreach($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
@@ -196,7 +196,8 @@
                             window.location.href = '{{ route('cart.index') }}';
                         })
                         .catch(function (error) {
-                            console.log(error);
+                            // console.log(error);
+                            window.location.href = '{{ route('cart.index') }}';
                         });
                 })
             })
