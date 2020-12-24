@@ -26,7 +26,7 @@ class ShopController extends Controller
             $products = $category->products();
             $categoryName = $category->name;
         } else {
-            $products = Product::take(12);
+            $products = Product::where('featured', true);
             $categoryName = 'Featured';
         }
 
