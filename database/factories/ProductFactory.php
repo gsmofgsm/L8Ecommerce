@@ -38,7 +38,7 @@ class ProductFactory extends Factory
      */
     protected function getUniqueName(): string
     {
-        $name = $this->faker->randomElement(['Laptop', 'Iphone', 'MacBook', 'Ipad']) . ' ' . random_int(1, 9);
+        $name = $this->faker->randomElement(['Laptop', 'Iphone', 'MacBook', 'Ipad', 'Desktop', 'Appliance']) . ' ' . random_int(1, 9);
         if (! Product::where('name', $name)->exists()) {
             return $name;
         }

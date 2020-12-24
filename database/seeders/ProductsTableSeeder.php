@@ -15,7 +15,10 @@ class ProductsTableSeeder extends Seeder
     public function run()
     {
         for ( $i = 0; $i < 8; $i++ ) {
-            Product::factory()->create();
+            $category = random_int(1, 4);
+            Product::factory()->create()->categories()->attach($category);
         }
+
+        Product::find(1)->categories()->attach(5);
     }
 }

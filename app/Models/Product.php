@@ -23,4 +23,9 @@ class Product extends Model
     {
         return '/img/products/' . $this->slug . '.jpg';
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
