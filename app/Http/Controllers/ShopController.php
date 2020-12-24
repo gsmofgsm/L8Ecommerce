@@ -15,12 +15,13 @@ class ShopController extends Controller
      */
     public function index()
     {
+        $pagination = 6;
         $categories = Category::all();
         if (request()->category) {
 //            $products = Product::with('categories')->whereHas('categories', function ($query) {
 //                $query->where('slug', request()->category);
 //            })->get();
-//            $categoryName = $categories->where('slug', request()->category)->first()->name;
+//            $categoryName = optional($categories->where('slug', request()->category)->first())->name;
             $category = Category::where('slug', request()->category)->firstOrFail();
             $products = $category->products();
             $categoryName = $category->name;
@@ -30,11 +31,11 @@ class ShopController extends Controller
         }
 
         if (request()->sort == 'low_high') {
-            $products = $products->orderBy('price')->simplePaginate(6);
+            $products = $products->orderBy('price')->simplePaginate($pagination);
         } elseif (request()->sort == 'high_low') {
-            $products = $products->orderBy('price', 'desc')->simplePaginate(6);
+            $products = $products->orderBy('price', 'desc')->simplePaginate($pagination);
         } else {
-            $products = $products->simplePaginate(6);
+            $products = $products->simplePaginate($pagination);
         }
 
         return view('shop')->with([
