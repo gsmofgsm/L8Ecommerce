@@ -39,6 +39,9 @@ class CheckoutController extends Controller
     {
 //        dd($request->all());
         try {
+            $contents = Cart::content()->map(function ($item) {
+                return $item->model->slug . ', ' . $item->qty;
+            })->values()->toJson();
 //            $charge = Stripe::charges()->create([
 //                'amount' => Cart::total() / 100,
 //                'currency' => 'EUR',
@@ -53,7 +56,12 @@ class CheckoutController extends Controller
             $user = new User;
 
             $user->charge(
-                round(Cart::total()), $request->paymentMethod
+                round(Cart::total()), $request->paymentMethod, [
+                    'metadata' => [
+                        'contents' => $contents,
+                        'quantity' => Cart::instance('default')->count(),
+                    ]
+                ]
             );
 
             // SUCCESSFUL
