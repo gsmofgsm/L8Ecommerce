@@ -69,7 +69,7 @@
                             </form>
                         </div>
                         <div>
-                            <select class="quantity">
+                            <select class="quantity" data-id="{{ $item->rowId }}">
                                 <option selected="">1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -179,4 +179,28 @@
     @include('partials.might-like')
 
 
+@endsection
+
+@section('extra-js')
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        (function() {
+            const classname = document.querySelectorAll('.quantity');
+
+            Array.from(classname).forEach(function (element) {
+                element.addEventListener('change', function() {
+                    const id = element.getAttribute('data-id');
+                    axios.patch(`/cart/${id}`, {
+                        quantity: this.value,
+                    })
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+            })
+        })();
+    </script>
 @endsection
