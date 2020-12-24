@@ -70,14 +70,12 @@
                         </div>
                         <div>
                             <select class="quantity" data-id="{{ $item->rowId }}">
-                                <option selected="">1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                @for($i = 1; $i <= 5; $i++)
+                                <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                @endfor
                             </select>
                         </div>
-                        <div>{{ $item->model->presentPrice() }}</div>
+                        <div>{{ presentPrice($item->subtotal) }}</div>
                     </div>
                 </div> <!-- end cart-table-row -->
                 @endforeach
@@ -194,7 +192,8 @@
                         quantity: this.value,
                     })
                         .then(function (response) {
-                            console.log(response);
+                            // console.log(response);
+                            window.location.href = '{{ route('cart.index') }}';
                         })
                         .catch(function (error) {
                             console.log(error);
