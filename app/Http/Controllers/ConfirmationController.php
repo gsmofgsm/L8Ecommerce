@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-//use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
-class CheckoutController extends Controller
+class ConfirmationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,10 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('checkout');
+        if (! session()->has('success_message')) {
+            return redirect('/');
+        }
+        return view('thankyou');
     }
 
     /**
@@ -37,31 +37,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        try {
-//            $charge = Stripe::charges()->create([
-//                'amount' => Cart::total() / 100,
-//                'currency' => 'EUR',
-//                'source' => $request->paymentMethod,
-//                'description' => 'Order',
-//                'receipt_email' => $request->email,
-//                'metadata' => [
-////                    'contents' => $contents,
-////                    'quantity' => Cart::instance('default')->count(),
-//                ],
-//            ]);
-            $user = new User;
-
-            $user->charge(
-                round(Cart::total()), $request->paymentMethod
-            );
-
-            // SUCCESSFUL
-//            return back()->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-            return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
-        } catch (\Exception $e) {
-            dd($e->getMessage());
-        }
+        //
     }
 
     /**
