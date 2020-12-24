@@ -57,6 +57,7 @@ class CheckoutController extends Controller
             );
 
             // SUCCESSFUL
+            Cart::instance('default')->destroy();
 //            return back()->with('success_message', 'Thank you! Your payment has been successfully accepted!');
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         } catch (\Exception $e) {
