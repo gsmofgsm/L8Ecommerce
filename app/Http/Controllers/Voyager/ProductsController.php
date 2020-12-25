@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Voyager;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\CategoryProduct;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +74,10 @@ class ProductsController extends VoyagerBaseController
 
         $allCategories = Category::all();
 
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'allCategories'));
+        $product = Product::find($id);
+        $categoriesForProduct = $product->categories()->get();
+
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'allCategories', 'categoriesForProduct'));
     }
 
     // POST BR(E)AD
@@ -174,8 +178,9 @@ class ProductsController extends VoyagerBaseController
         }
 
         $allCategories = Category::all();
+        $categoriesForProduct = collect([]);
 
-        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'allCategories'));
+        return Voyager::view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'allCategories', 'categoriesForProduct'));
     }
 
     /**
