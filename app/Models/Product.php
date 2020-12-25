@@ -19,11 +19,6 @@ class Product extends Model
         return $query->inRandomOrder()->take(4);
     }
 
-    public function getImageUrlAttribute()
-    {
-        return '/img/products/' . $this->slug . '.jpg';
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);
