@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Voyager;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\CategoryProduct;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,7 +78,6 @@ class ProductsController extends VoyagerBaseController
     // POST BR(E)AD
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $slug = $this->getSlug($request);
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
@@ -103,6 +103,17 @@ class ProductsController extends VoyagerBaseController
         $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
 
         event(new BreadDataUpdated($dataType, $data));
+
+        CategoryProduct::where('product_id', $id)->delete();
+        // re-insert if there is at least one category checked
+        if ($request->category) {
+            foreach($request->category as $category) {
+                CategoryProduct::create([
+                    'product_id' => $id,
+                    'category_id' => $category,
+                ]);
+            }
+        }
 
         if (auth()->user()->can('browse', app($dataType->model_name))) {
             $redirect = redirect()->route("voyager.{$dataType->slug}.index");
