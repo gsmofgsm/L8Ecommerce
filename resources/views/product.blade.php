@@ -28,7 +28,7 @@
                 <div class="product-section-thumbnail selected">
                     <img src="{{ productImage($product->image) }}" alt="product">
                 </div>
-                @foreach($product->images as $image)
+                @foreach(json_decode($product->images) as $image)
                     <div class="product-section-thumbnail">
                         <img src="{{ productImage($image) }}" alt="product">
                     </div>
