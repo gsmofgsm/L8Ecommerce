@@ -90,7 +90,19 @@
                                 </div>
                             @endforeach
 
-                            test
+                            <div class="form-group">
+                                <label>Categories</label>
+                                <ul style="list-style-type: none; padding-left: 0;">
+                                    @foreach ($allCategories as $category)
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" value="{{$category->id}}" name="category[]" style="margin-right: 5px;">
+                                            {{ $category->name }}
+                                        </label>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
 
                         </div><!-- panel-body -->
 
