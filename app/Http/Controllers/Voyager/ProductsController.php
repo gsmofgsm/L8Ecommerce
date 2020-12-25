@@ -109,7 +109,6 @@ class ProductsController extends VoyagerBaseController
 
         event(new BreadDataUpdated($dataType, $data));
 
-        CategoryProduct::where('product_id', $id)->delete();
         // re-insert if there is at least one category checked
         $this->updateProductCategories($request, $id);
 
@@ -218,13 +217,14 @@ class ProductsController extends VoyagerBaseController
 
     protected function updateProductCategories(Request $request, $id): void
     {
-        if ($request->category) {
-            foreach ($request->category as $category) {
-                CategoryProduct::create([
-                    'product_id' => $id,
-                    'category_id' => $category,
-                ]);
-            }
-        }
+        Product::find($id)->categories()->sync($request->category);
+//        if ($request->category) {
+//            foreach ($request->category as $category) {
+//                CategoryProduct::create([
+//                    'product_id' => $id,
+//                    'category_id' => $category,
+//                ]);
+//            }
+//        }
     }
 }
