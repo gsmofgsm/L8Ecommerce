@@ -45,3 +45,8 @@ Route::delete('/coupon', [CouponsController::class, 'destroy'])->name('coupon.de
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 Route::get('/thankyou', [ConfirmationController::class, 'index'])->name('confirmation.index');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

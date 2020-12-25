@@ -26,12 +26,16 @@
         "nunomaduro/collision": "^5.0",
         "phpunit/phpunit": "^9.3.3"
     },
-    "repositories": [
-        {
+    "repositories": {
+        "0": {
             "type": "vcs",
             "url": "https://github.com/gsmofgsm/LaravelShoppingcart.git"
+        },
+        "hooks": {
+            "type": "composer",
+            "url": "https://larapack.io"
         }
-    ],
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
