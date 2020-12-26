@@ -43,4 +43,9 @@ class User extends \TCG\Voyager\Models\User
     ];
 
     protected $stripe_id;
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
