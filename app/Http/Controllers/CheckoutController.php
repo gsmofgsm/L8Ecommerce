@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\OrderPlaced;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\User;
 //use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -71,7 +73,9 @@ class CheckoutController extends Controller
                 ]
             );
 
-            $this->addToOrdersTable($request);
+            $order = $this->addToOrdersTable($request);
+
+            Mail::send(new OrderPlaced($order)); // todo: queue it up
 
             // SUCCESSFUL
             Cart::instance('default')->destroy();
@@ -85,11 +89,7 @@ class CheckoutController extends Controller
         }
     }
 
-    /**
-     * @param CheckoutRequest $request
-     * @param $error
-     */
-    protected function addToOrdersTable(CheckoutRequest $request, $error=null): void
+    protected function addToOrdersTable(CheckoutRequest $request, $error=null)
     {
         // Insert into orders table
         $order = Order::create([
@@ -118,6 +118,8 @@ class CheckoutController extends Controller
                 'quantity' => $item->qty,
             ]);
         }
+
+        return $order;
     }
 
     private function getNumbers()
