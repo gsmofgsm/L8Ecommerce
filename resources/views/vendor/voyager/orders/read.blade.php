@@ -40,6 +40,23 @@
 
                 <div class="panel panel-bordered" style="padding-bottom:5px;">
                     <!-- form start -->
+
+                    <div class="panel-heading" style="border-bottom:0;">
+                        <h3 class="panel-title">Products for this order</h3>
+                    </div>
+
+                    <div class="panel-body" style="padding-top:0;">
+                    <ul>
+                        @foreach ($products as $product)
+                            <li style="margin-bottom: 10px;">
+                                <div>Product Id: {{ $product->id }}</div>
+                                <div>Product Name: {{ $product->name }}</div>
+                                <div>Product Price: {{ $product->presentPrice() }}</div>
+                                <div>Product Quantity: {{ $product->pivot->quantity }}</div>
+                            </li>
+                        @endforeach
+                    </ul>
+                    </div>
                     @foreach($dataType->readRows as $row)
                         @php
                             if ($dataTypeContent->{$row->field.'_read'}) {
