@@ -106,7 +106,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($dataTypeContent as $data)
-                                    <tr>
+                                    <tr class="{{ $data->error ? 'order-error' : '' }} {{ $data->shipped ? 'order-shipped' : '' }}">
                                         @if($showCheckboxColumn)
                                             <td>
                                                 <input type="checkbox" name="row_id" id="checkbox_{{ $data->getKey() }}" value="{{ $data->getKey() }}">
@@ -313,6 +313,19 @@
     @if(!$dataType->server_side && config('dashboard.data_tables.responsive'))
         <link rel="stylesheet" href="{{ voyager_asset('lib/css/responsive.dataTables.min.css') }}">
     @endif
+    <style>
+        .order-error {
+            color: #a94442;
+            background-color: #f2dede !important;
+            border-color: #ebccd1;
+        }
+
+        .order-shipped {
+            color: #3c763d;
+            background-color: #dff0d8 !important;
+            border-color: #d6e9c6;
+        }
+    </style>
 @stop
 
 @section('javascript')
