@@ -58,6 +58,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/search', [ShopController::class, 'search'])->name('search');
+
+
 Route::get('/mailable/{order}', function ($order) {
     $order = \App\Models\Order::find($order);
     return new \App\Mail\OrderPlaced($order);
