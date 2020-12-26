@@ -69,7 +69,7 @@ class ShopController extends Controller
         ]);
 
         $query = $request->input('query');
-        $products = Product::where('name', 'like', "%{$query}%")->get();
+        $products = Product::where('name', 'like', "%{$query}%")->simplePaginate(3); // todo: use normal paginate
         return view('search-results', compact('products'));
     }
 }

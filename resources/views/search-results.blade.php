@@ -32,9 +32,9 @@
     @endif
     </div>
 
-    <div class="search-container container">
+    <div class="search-results-container container">
         <h1>Search Results</h1>
-        <p>{{ $products->count() }} result(s) for '{{ request()->input('query') }}'</p>
+        <p class="search-results-count">{{$products->count()}} result(s) for '{{ request()->input('query') }}'</p>
 
         <table class="table table-bordered table-striped">
             <thead>
@@ -56,6 +56,8 @@
             @endforeach
             </tbody>
         </table>
+
+        {{ $products->appends(request()->input())->links() }}
     </div> <!-- end search-container -->
 
 @endsection
