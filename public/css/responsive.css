@@ -22,7 +22,11 @@
   header.with-background .top-nav ul,
   header .top-nav ul {
     margin: 20px auto 0;
-    width: 80%;
+  }
+
+  header.with-background .top-nav-left,
+  header .top-nav-left {
+    flex-direction: column;
   }
 
   header.with-background .hero,
@@ -43,6 +47,11 @@
 
   .featured-section .products {
     grid-template-columns: 1fr;
+  }
+
+  .products-header {
+    flex-direction: column;
+    margin-bottom: 48px;
   }
 
   .blog-section .blog-posts {
@@ -70,6 +79,15 @@
 
   .breadcrumbs {
     text-align: center;
+  }
+
+  .breadcrumbs .breadcrumbs-container {
+    flex-direction: column;
+  }
+
+  .search-form {
+    margin: 14px auto;
+    width: 80%;
   }
 
   .products-section {
