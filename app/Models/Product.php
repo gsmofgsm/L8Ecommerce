@@ -12,6 +12,7 @@ class Product extends Model
     use HasFactory, SearchableTrait;
 //    use Searchable;
 
+    protected $fillable = ['quantity'];
     /**
      * Searchable rules.
      *

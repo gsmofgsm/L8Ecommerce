@@ -6,6 +6,7 @@ use App\Http\Requests\CheckoutRequest;
 use App\Mail\OrderPlaced;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Models\User;
 //use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -77,6 +78,9 @@ class CheckoutController extends Controller
 
             Mail::send(new OrderPlaced($order)); // todo: queue it up
 
+            // decrease the quantities of all the products in the cart
+            $this->decreaseQuantities();
+
             // SUCCESSFUL
             Cart::instance('default')->destroy();
             session()->forget('coupon');
@@ -140,4 +144,11 @@ class CheckoutController extends Controller
 //            'newTotal' => $newTotal,
 //        ]);
 //    }
+    protected function decreaseQuantities()
+    {
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->model->id);
+            $product->update(['quantity' => $product->quantity - $item->qty]);
+        }
+    }
 }
