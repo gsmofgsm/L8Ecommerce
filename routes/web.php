@@ -59,6 +59,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/search', [ShopController::class, 'search'])->name('search');
+Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
 
 
 Route::get('/mailable/{order}', function ($order) {

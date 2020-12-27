@@ -76,4 +76,9 @@ class ShopController extends Controller
         $products = Product::search($query)->simplePaginate(5); // todo: use normal paginate
         return view('search-results', compact('products'));
     }
+
+    public function searchAlgolia(Request $request)
+    {
+        return view('search-results-algolia');
+    }
 }
