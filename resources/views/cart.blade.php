@@ -14,24 +14,10 @@
             <span>Shopping Cart</span>
     @endcomponent
 
+    <x-flash-messages />
+
     <div class="cart-section container">
         <div>
-            @if (session()->has('success_message'))
-                <div class="alert alert-success">
-                    {{ session()->get('success_message') }}
-                </div>
-            @endif
-
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             @if (Cart::count() > 0)
 
             <h2>{{ Cart::count() }} items in Shopping Cart</h2>

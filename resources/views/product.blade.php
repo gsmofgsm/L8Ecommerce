@@ -16,6 +16,8 @@
         <span>{{ $product->name }}</span>
     @endcomponent
 
+    <x-flash-messages />
+
     <div class="product-section container">
         <div>
             <div class="product-section-image">

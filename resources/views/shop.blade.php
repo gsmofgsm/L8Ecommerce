@@ -14,6 +14,8 @@
             <span>Shop</span>
     @endcomponent
 
+    <x-flash-messages />
+
     <div class="products-section container">
         <div class="sidebar">
             <h3>By Category</h3>
@@ -59,7 +61,6 @@
         </div>
     </div>
 
-    {{ dump(urldecode('products%5Bquery%5D=ipa')) }}
 @endsection
 
 @section('extra-js')
