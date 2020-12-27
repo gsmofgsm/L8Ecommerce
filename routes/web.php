@@ -33,12 +33,6 @@ Route::post('/cart/later/{product}', [CartController::class, 'later'])->name('ca
 Route::delete('/later/{product}', [SaveForLaterController::class, 'destroy'])->name('later.destroy');
 Route::post('/later/cart/{product}', [SaveForLaterController::class, 'cart'])->name('later.cart');
 
-Route::get('empty', function () {
-    Cart::destroy();
-    Cart::instance('saveForLater')->destroy();
-    return 'Cart is now empty';
-});
-
 Route::post('/coupon', [CouponsController::class, 'store'])->name('coupon.store');
 Route::delete('/coupon', [CouponsController::class, 'destroy'])->name('coupon.destroy');
 
@@ -61,8 +55,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/search', [ShopController::class, 'search'])->name('search');
 Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
 
-
+// helper routes
 Route::get('/mailable/{order}', function ($order) {
     $order = \App\Models\Order::find($order);
     return new \App\Mail\OrderPlaced($order);
+});
+
+Route::get('empty', function () {
+    Cart::destroy();
+    Cart::instance('saveForLater')->destroy();
+    Session::forget('coupon');
+    return 'Cart is now empty';
 });
