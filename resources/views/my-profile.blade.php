@@ -23,7 +23,7 @@
                     <a href="{{ route('users.edit') }}">My Profile</a>
                 </li>
                 <li>
-                    <a href="{{ route('users.edit') }}">My Orders</a>
+                    <a href="{{ route('orders.index') }}">My Orders</a>
                 </li>
             </ul>
         </div> <!-- end sidebar -->

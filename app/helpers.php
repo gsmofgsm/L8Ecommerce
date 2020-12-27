@@ -1,10 +1,16 @@
 <?php
 
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 function presentPrice($price)
 {
     return money_format('$%i', $price / 100);
+}
+
+function presentDate($date)
+{
+    return Carbon::parse($date)->format('M d, Y');
 }
 
 function setActiveCategory($category, $output = 'active')
@@ -16,7 +22,7 @@ function productImage($image)
 {
     return $image && file_exists('storage/'.$image)
         ? asset('storage/'.$image)
-        : asset('storage/img/not-found.png');
+        : asset('img/not-found.png');
 }
 
 function getNumbers()
