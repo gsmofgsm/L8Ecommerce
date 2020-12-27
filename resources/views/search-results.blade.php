@@ -3,7 +3,7 @@
 @section('title', 'Search Results')
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
 @endsection
 
 @section('content')
@@ -64,4 +64,5 @@
 @endsection
 
 @section('extra-js')
+    <x-algolia-autocomplete-js />
 @endsection

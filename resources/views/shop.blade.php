@@ -3,7 +3,7 @@
 @section('title', 'Products')
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
 @endsection
 
 @section('content')
@@ -59,4 +59,9 @@
         </div>
     </div>
 
+    {{ dump(urldecode('products%5Bquery%5D=ipa')) }}
+@endsection
+
+@section('extra-js')
+    <x-algolia-autocomplete-js />
 @endsection

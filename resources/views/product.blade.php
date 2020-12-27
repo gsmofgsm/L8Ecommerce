@@ -3,7 +3,7 @@
 @section('title', $product->name)
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
 @endsection
 
 @section('content')
@@ -85,4 +85,8 @@
             }
         })();
     </script>
+@endsection
+
+@section('extra-js')
+    <x-algolia-autocomplete-js />
 @endsection
