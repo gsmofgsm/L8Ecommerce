@@ -46,7 +46,10 @@ class CheckoutController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
-//        dd($request->all());
+        // Check race condition when there are less items available to purchase
+        if ($reason = $this->productsAreNoLongerAvailable()) {
+            return redirect()->route('cart.index')->withErrors('Sorry! ' . $reason);
+        }
         try {
             $contents = Cart::content()->map(function ($item) {
                 return $item->model->slug . ', ' . $item->qty;
@@ -89,7 +92,7 @@ class CheckoutController extends Controller
         } catch (\Exception $e) {
             $this->addToOrdersTable($request, $e->getMessage());
 
-            return back()->withErrors('Erro! ' . $e->getMessage());
+            return back()->withErrors('Error! ' . $e->getMessage());
         }
     }
 
@@ -150,5 +153,22 @@ class CheckoutController extends Controller
             $product = Product::find($item->model->id);
             $product->update(['quantity' => $product->quantity - $item->qty]);
         }
+    }
+
+    protected function productsAreNoLongerAvailable()
+    {
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->model->id);
+            if ($product->quantity < $item->qty) {
+                if ($product->quantity === 0) {
+                    Cart::remove($item->rowId);
+                    return "{$product->name} no longer available.";
+                } else {
+                    Cart::update($item->rowId, $product->quantity);
+                    return "{$product->name} has only {$product->quantity} in stock.";
+                }
+            }
+        }
+        return false;
     }
 }
