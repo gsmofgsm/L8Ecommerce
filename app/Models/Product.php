@@ -9,7 +9,8 @@ use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Product extends Model
 {
-    use HasFactory, SearchableTrait, Searchable;
+    use HasFactory, SearchableTrait;
+//    use Searchable;
 
     /**
      * Searchable rules.
