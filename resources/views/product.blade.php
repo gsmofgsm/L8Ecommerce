@@ -39,6 +39,7 @@
         <div class="product-section-information">
             <h1 class="product-section-title">{{ $product->name }}</h1>
             <div class="product-section-subtitle">{{ $product->details }}</div>
+            <div>{!! $stockLevel !!}</div>
             <div class="product-section-price">{{ $product->presentPrice() }}</div>
 
             <p>
@@ -47,7 +48,7 @@
 
             <p>&nbsp;</p>
 
-{{--            <a href="#" class="button">Add to Cart</a>--}}
+            @if ($product->quantity > 0)
             <form action="{{ route('cart.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{ $product->id }}">
@@ -55,6 +56,7 @@
                 <input type="hidden" name="price" value="{{ $product->price }}">
                 <button type="submit" class="button button-plain">Add to Cart</button>
             </form>
+            @endif
         </div>
     </div> <!-- end product-section -->
 
