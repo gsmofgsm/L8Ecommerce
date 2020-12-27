@@ -29,6 +29,7 @@ class ProductFactory extends Factory
             'details' => $this->faker->sentence,
             'price' => random_int(109999, 249999),
             'description' => $this->faker->paragraph,
+            'image' => 'products/December2020/product.jpg',
             'featured' => true,
         ];
     }

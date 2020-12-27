@@ -155,6 +155,17 @@
   .checkout-section .checkout-table-container {
     margin-left: 10px;
   }
+
+  .auth-pages {
+    margin: 50px auto;
+    grid-template-columns: 1fr;
+    grid-gap: 40px;
+  }
+
+  .auth-pages .auth-right {
+    border-left: none;
+    padding-left: 20px;
+  }
 }
 
 /* Small Devices, Tablets */
