@@ -31,6 +31,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph,
             'image' => 'products/December2020/product.jpg',
             'featured' => true,
+            'quantity' => 10,
         ];
     }
 
