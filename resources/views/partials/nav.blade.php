@@ -1,7 +1,7 @@
 <header>
     <div class="top-nav container">
         <div class="top-nav-left">
-            <div class="logo">Ecommerce</div>
+            <div class="logo"><a href="/">Ecommerce</a></div>
             @if (! request()->is('checkout') && ! request()->is('guestCheckout'))
             {{ menu('main', 'partials.menus.main') }}
             @endif

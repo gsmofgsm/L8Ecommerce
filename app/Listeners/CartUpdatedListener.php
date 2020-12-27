@@ -2,10 +2,8 @@
 
 namespace App\Listeners;
 
+use App\Jobs\UpdateCoupon;
 use App\Models\Coupon;
-use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class CartUpdatedListener
 {
@@ -32,10 +30,7 @@ class CartUpdatedListener
 
             $coupon = Coupon::where('code', $couponName)->first();
 
-            session()->put('coupon', [
-                'name' => $coupon->code,
-                'discount' => $coupon->discount(Cart::subtotal()),
-            ]);
+            UpdateCoupon::dispatchSync($coupon);
         }
     }
 }
