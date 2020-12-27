@@ -127,7 +127,7 @@ class CheckoutController extends Controller
         $tax = config('cart.tax') / 100;
         $discount = session()->get('coupon')['discount'] ?? 0;
         $code = session()->get('coupon')['name'] ?? null;
-        $newSubtotal = Cart::subtotal() - $discount;
+        $newSubtotal = max(Cart::subtotal() - $discount, 0);
         $newTax = $newSubtotal * $tax;
         $newTotal = $newSubtotal + $newTax;
 
