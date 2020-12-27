@@ -7,6 +7,7 @@ use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\UsersController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/search', [ShopController::class, 'search'])->name('search');
 Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/my-profile', [UsersController::class, 'edit'])->name('users.edit');
+    Route::patch('/my-profile', [UsersController::class, 'update'])->name('users.update');
+});
 
 // helper routes
 Route::get('/mailable/{order}', function ($order) {
