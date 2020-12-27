@@ -45,4 +45,17 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Customize array
+        $extraFields = [
+            'categories' => $this->categories->pluck('name')->toArray()
+        ];
+        // do not forget to add this in algolia configuration > attributes for faceting
+
+        return array_merge($array, $extraFields);
+    }
 }

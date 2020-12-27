@@ -1299,3 +1299,11 @@ h1.checkout-heading {
   margin-bottom: 20px;
 }
 
+.search-results-container-algolia {
+  min-height: 400px;
+  margin: 40px 0;
+  display: flex;
+  grid-template-columns: 3fr 7fr;
+  grid-gap: 20px;
+}
+

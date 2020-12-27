@@ -18,16 +18,18 @@
                 empty: 'No results for <q>{{ query }}</q>',
                 item: function(item) {
                     return `
-                        <div class="result-title">
-                            ${item._highlightResult.name.value}
-                        </div>
-                        <div class="result-details">
-                            ${item._highlightResult.details.value}
-                        </div>
-                        <div class="result-price">
-                            $${(item.price / 100).toFixed(2)}
-                        </div>
-                        <img src="${window.location.origin}/${item.image}" alt="img" class="algolia-thumb-result">
+                        <a href="${window.location.origin}/shop/${item.slug}">
+                            <div class="result-title">
+                                ${item._highlightResult.name.value}
+                            </div>
+                            <div class="result-details">
+                                ${item._highlightResult.details.value}
+                            </div>
+                            <div class="result-price">
+                                $${(item.price / 100).toFixed(2)}
+                            </div>
+                            <img src="${window.location.origin}/${item.image}" alt="img" class="algolia-thumb-result">
+                        </a>
                     `;
                 }
 
@@ -60,7 +62,7 @@
 
         instantsearch.widgets.refinementList({
             container: '#refinement-list',
-            attribute: 'price',
+            attribute: 'categories',
         }),
     ]);
 

@@ -33,17 +33,23 @@
     @endif
     </div>
 
-    <div class="search-results-container container">
-        <h1>Search Results Algolia</h1>
+    <div class="container">
+        <div class="search-results-container-algolia">
+            <div>
+                <h2>Search</h2>
+                <div id="searchbox"></div>
+                <div id="stats"></div>
 
-        <div id="searchbox"></div>
-        <div id="stats"></div>
-        <div id="refinement-list"></div>
-        <div id="hits"></div>
-        <div id="pagination"></div>
-        <div id="hits-per-page"></div>
-    </div> <!-- end search-container -->
-
+                <h2>Categories</h2>
+                <div id="refinement-list"></div>
+            </div>
+            <div>
+                <div id="hits"></div>
+                <div id="pagination"></div>
+                <div id="hits-per-page"></div>
+            </div>
+        </div> <!-- end search-container -->
+    </div>
 @endsection
 
 @section('extra-js')
